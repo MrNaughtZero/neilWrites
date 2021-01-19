@@ -5,26 +5,28 @@ from app.forms import RegisterForm, LoginForm
 
 auth_bp = Blueprint("auth", __name__)
 
-@auth_bp.route('/auth/register', methods=['GET'])
-def register():
-    if Admin().check_for_admin():
-        return abort(404)
-    return render_template('/auth/register.html', form=RegisterForm(), message=get_flashed_messages())
+# @auth_bp.route('/auth/register', methods=['GET'])
+# def register():
+#     if Admin().check_for_admin():
+#         return abort(404)
+#     return render_template('/auth/register.html', form=RegisterForm(), message=get_flashed_messages())
 
-@auth_bp.route('/auth/add/admin', methods=['POST'])
-def add_admin():
-    form = RegisterForm()
-    if not form.validate_on_submit():
-        flash(list(form.errors.values())[0])
-        return redirect(url_for('auth.register'))
+# @auth_bp.route('/auth/add/admin', methods=['POST'])
+# def add_admin():
+#     form = RegisterForm()
+#     if not form.validate_on_submit():
+#         flash(list(form.errors.values())[0])
+#         return redirect(url_for('auth.register'))
     
-    new_admin = Admin(username=request.form.get('username'), password=request.form.get('password')).create_user()
-    if not new_admin:
-        flash('Something went wrong. Please try again.')
-        return redirect(url_for('auth.register'))
+#     new_admin = Admin(username=request.form.get('username'), password=request.form.get('password')).create_user()
+#     if not new_admin:
+#         flash('Something went wrong. Please try again.')
+#         return redirect(url_for('auth.register'))
 
-    login_user(new_admin)
-    return redirect(url_for('admin.dashboard'))
+#     login_user(new_admin)
+#     return redirect(url_for('admin.dashboard'))
+
+# Above is commented out to prevent a new user registering once the first admin is registered.
 
 @auth_bp.route('/auth/login', methods=['GET'])
 def login():
