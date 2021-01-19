@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'includes/styles.html' %}
+    <title>neilWrites - Categories</title>
+</head>
+<body>
+    {% include 'includes/admin-navigation.html' %}
+    <main class="main-bg">
+        <section class="add-admin-category">
+            <h1 class="admin-page-heading">Add New Categories</h1>
+            <form method="POST" action="{{url_for('admin.add_category')}}">
+                <div class="form-control">
+                    {{form.category(placeholder="Category Name")}}
+                </div>
+                {{form.csrf_token}}
+                <div class="form-control">
+                    <button type="submit" class="btn-blue form-submit">Add Category</button>
+                </div>
+            </form>
+
+            {% if message !=[] %}
+                <div class="auth-error">
+                    {{message[0] | replace('[', '') | replace(']', '') | replace("'", '') }} 
+                </div>
+            {% endif %} 
+        </section>
+
+        <section class="admin-categories">
+            {% for item in categories %}
+                <a href="{{url_for('main.category_page', category=item.cat)}}">
+                <button type="button" class="category-btn">{{item.cat}}</button>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>

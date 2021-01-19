@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'includes/styles.html' %}
+    <title>neilWrites</title>
+</head>
+<body onload="changeNavPosition()">
+    {% include 'includes/front-navigation.html' %}
+    <main class="main-bg">
+        <section class="home-content">
+            <div class="left-block">
+                {% include 'includes/left-sidebar.html' %}
+            </div>
+            <div class="right-block">
+                {% if 'category' in request.path %}
+                    {% for item in posts %}
+                        <h3 class="category-top-name">{{item.category}}</h3>
+                    {% endfor %}
+                {% else %}
+                    <h3>ALL POSTS</h3>
+                {% endif %}
+               <div class="index-all-posts">
+                   {% for post in posts %}
+                        <div class="index-post">
+                            <div class="index-post-content">
+                                <a href="{{url_for('main.category_page', category=post.category)}}">
+                                    <span class="category-block">{{post.category}}</span>
+                                </a>
+                                <a href="{{url_for('main.view_post', title=post.title)}}">
+                                    <h1 class="post-title">{{post.title|replace('-', ' ')}}</h1>
+                                </a>
+                                <p class="recent-post-excerpt">{{post.content|safe|truncate(200)}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+               </div>
+            </div>
+        </section>
+    </main>
+    {% include 'includes/scripts.html' %}
+</body>
+</html>

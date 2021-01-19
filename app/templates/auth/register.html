@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'includes/styles.html' %}
+    <title>neilWrites - Register</title>
+</head>
+<body>
+    {% include 'includes/front-navigation.html' %}
+    <main class="main-bg">
+        <section class="register">
+            <h2 class="auth-heading">Register</h2>
+            <form method="POST" action="{{url_for('auth.add_admin')}}">
+                <div class="form-control">
+                    {{form.username(placeholder="Username")}}
+                </div>
+                <div class="form-control">
+                    {{form.password(placeholder="********")}}
+                </div>
+                <div class="form-control">
+                    {{form.confirm_password(placeholder="********")}}
+                </div>
+                    
+                {{form.csrf_token}}
+                <div class="form-control">
+                    <button type="submit" class="btn-blue register-btn">
+                        Register
+                    </button>
+                </div>
+            </form>
+
+            {% if message !=[] %}
+                <div class="auth-error">
+                    {{message[0] | replace('[', '') | replace(']', '') | replace("'", '') }} 
+                </div>
+            {% endif %} 
+        </section>
+    </main>
+</body>
+</html>

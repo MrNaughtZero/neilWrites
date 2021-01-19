@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'includes/styles.html' %}
+    <link href="{{url_for('static', filename='styles/prism.css')}}" type="text/css" rel="stylesheet">
+    <title>neilWrites - Posts</title>
+</head>
+<body>
+    {% include 'includes/admin-navigation.html' %}
+    <main class="main-bg">
+        <section class="admin-posts">
+            <h1 class="admin-page-heading">Add New Post</h1>
+            <form>
+                <div class="form-control">
+                    <input type="text" placeholder="Enter Post Title" id="post-title">
+                    <a href="{{url_for('admin.create_post')}}">
+                        <button onclick="savePostTitle()" type="button" class="btn-blue form-submit">Create Post</button>
+                    </a>
+                </div>
+            </form>
+        </section>
+
+        {% if message !=[] %}
+            <div class="flashed-message-delete">
+                {{message[0]}}
+            </div>
+        {% endif %}
+
+        <section class="all-posts">
+            {% for item in recent %}
+                <div class="recent-post-block">
+                    <div class="recent-post-block-top">
+                        <span class="category-block">{{item.category}}</span>
+                            <div class="icon-actions">
+                                <a href="{{url_for('admin.edit_post', id=item.id)}}">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <i onclick="confirmDelete('{{item.id}}')" class="fas fa-trash-alt"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <a href="{{url_for('main.view_post', title=item.title)}}">
+                        <h1 class="recent-post-title">{{item.title|replace("-", " ")}}</h1>
+                    </a>
+                    <p class="recent-post-excerpt">{{item.content|safe|truncate(200)}}</p>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+    {% include 'includes/scripts.html' %}
+</body>
+</html>

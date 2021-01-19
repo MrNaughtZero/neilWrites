@@ -1,0 +1,57 @@
+<div class="home-top-icons">
+    <div class="home-icon-container">
+        <a href="{{url_for('main.index')}}">
+            <i class="fas fa-bolt"></i>Home
+        </a>
+    </div>
+    <div class="home-icon-container">
+        <a href="https://github.com/MrNaughtZero" target="_blank">
+            <i class="fab fa-github"></i>Github
+        </a>
+    </div>
+</div>
+<h2 div class="left-block-header"><i class="fas fa-certificate"></i>CATEGORIES</h2>
+<div class="left-block-categories">
+    {% for item in categories %}
+        <a href="{{url_for('main.category_page', category=item.cat)}}">
+            <button type="button" class="category-btn">{{item.cat}}</button>
+        </a>
+    {% endfor %}
+</div>
+<h2 div class="left-block-header"><i class="fas fa-at"></i>SUBSCRIBE</h2>
+<div class="left-block-subscribe">
+    <button id="email-sub-btn" onclick="showNewsletterForm()" type="button" class="category-btn">Email</button>
+    <button type="button" class="category-btn">Notifications</button>
+</div>
+
+ <!-- Mail Chimp Form -->
+
+ <form class="mail-chimp-form" action="https://gmail.us7.list-manage.com/subscribe/post" method="POST">
+    <input type="hidden" name="u" value="9d9fe1a38b841d2c3049e03b0">
+    <input type="hidden" name="id" value="d23d280744">
+
+    <p class="newsletter-text">Sign up to receive emails when a new post is made. I promise not to spam.</p>
+    <!-- people should not fill these in and expect good things -->
+    <div id="mergeTable" class="mergeTable">
+       <div class="mergeRow dojoDndItem mergeRow-email" id="mergeRow-0">
+          <div class="field-group">
+             <input type="email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value="" required placeholder="Email Address">
+          </div>
+       </div>
+    </div>
+    <div class="submit_container clear">
+       <input type="submit" class="formEmailButton" name="submit" value="Subscribe" class="btn-blue">
+    </div>
+    <input type="hidden" name="ht" value="620358886350cf5995aecc89baaf5a9a060d971e:MTYxMTA3MDk3Mi41NDc4">
+    <input type="hidden" name="mc_signupsource" value="hosted">
+ </form>
+
+<!-- Mail Chimp Form End -->
+<h2 div class="left-block-header must-read-header"><i class="fab fa-readme"></i>MUST READ</h2>
+<a href="{{url_for('main.view_post', title=new.title)}}">
+    <div class="must-read-block">
+        <h2><b>NEW</b> IN<br>{{new.category}}</h2>
+        <p class="must-read-text">{{new.title|replace("-", " ")}}</p>
+    </div>
+</a>
+<p class="copyright">© Neil McNaught</p>

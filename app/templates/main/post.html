@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'includes/styles.html' %}
+    <link href="{{url_for('static', filename='styles/prism.css')}}" type="text/css" rel="stylesheet">
+    <title>neilWrites</title>
+</head>
+<body onload="changeNavPosition(), previewPostValues()">
+    {% include 'includes/front-navigation.html' %}
+    <main class="main-bg">
+        <section class="home-content">
+            <div class="left-block">
+                {% include 'includes/left-sidebar.html' %}
+            </div>
+            <div class="right-block view-post">
+                {% if post %}
+                    <a href="{{url_for('main.category_page', category=post.category)}}">
+                        <button type="button" class="category-btn">{{post.category}}</button>
+                    </a>
+                    <h1 class="view-post-title">{{post.title|replace("-", " ")}}</h1>
+                    <h3 class="last-updated">Last Updated {{post.last_update}}</h3>
+                    <div class="social-share-buttons">
+                        <div class="twitter-share">
+                            <a href="https://twitter.com/intent/tweet?url=127.0.0.1:5000/{{post.title}}" target="_blank"><i class="fab fa-twitter"></i> Tweet this</a>
+                        </div>
+                        <div class="facebook-share">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=127.0.0.1:5000/{{post.title}}" target="_blank"><i class="fab fa-facebook-square"></i>
+                                Share on Facebook
+                              </a>
+                        </div>
+                    </div>
+                    <div class="post-content-wrapper">
+                        {{post.content|safe}}
+                    </div>
+                    <div class="social-share-buttons">
+                        <div class="twitter-share">
+                            <a href="https://twitter.com/intent/tweet?url=127.0.0.1:5000/{{post.title}}" target="_blank"><i class="fab fa-twitter"></i> Tweet this</a>
+                        </div>
+                        <div class="facebook-share">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=127.0.0.1:5000/{{post.title}}" target="_blank"><i class="fab fa-facebook-square"></i>
+                                Share on Facebook
+                              </a>
+                        </div>
+                    </div>
+                    <div class="author-information">
+                        <img src="{{url_for('static', filename='img/profile-picture.jpeg')}}" class="author-img" height="75" width="75">
+                        <div class="author-text">
+                            <h5>Written by Neil McNaught</h5>
+                            <h5>Created: {{post.date}}</h5>
+                        </div>
+                    </div>
+
+                {% else %}
+                    <h1 class="preview-post-heading">You are previewing. Return to your previous tab to publish this post</h1>
+                    <button type="button" class="category-btn" id="preview-category"></button>
+                    <h1 class="view-post-title"></h1>
+                    <div class="social-share-buttons">
+                        <div class="twitter-share">
+                            <a href="https://twitter.com/intent/tweet?url=127.0.0.1:5000/{{post.title}}" target="_blank"><i class="fab fa-twitter"></i> Tweet this</a>
+                        </div>
+                        <div class="facebook-share">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=127.0.0.1:5000/{{post.title}}" target="_blank"><i class="fab fa-facebook-square"></i>
+                                Share on Facebook
+                              </a>
+                        </div>
+                    </div>
+                    <div class="post-content-wrapper"></div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+    {% include 'includes/scripts.html' %}
+    <script src="{{url_for('static', filename='scripts/prism.js')}}"></script>
+</body>
+</html>

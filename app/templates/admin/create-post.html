@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'includes/styles.html' %}
+    <title>neilWrites - Create Post</title>
+</head>
+<body onload="checkStorageForTitle()">
+    {% include 'includes/admin-navigation.html' %}
+    <main class="main-bg">
+        <section class="create-post">
+            <form id="create-post-form" method="POST" action="{{url_for('admin.add_post')}}">
+                <div class="form-control">
+                    {{form.title(placeholder="Post Title")}}
+                </div>
+                <div class="create-post-dropdowns">
+                    <div class="form-control">
+                        <label for="category">Category</label>
+                        {{form.category}}
+                    </div>
+                    <div class="form-control">
+                        <label for="category">Status</label>
+                        {{form.status}}
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    {{form.content(placeholder="Enter Post Content", id="post-content")}}
+                </div>
+                {{form.csrf_token}}
+                <div class="form-control create-post-btns">
+                    <button type="button" onclick="changePostValue()" class="btn-blue form-btn">Create Post</button>
+                    <button type="button" onclick="previewPost()" class="btn-blue form-btn">Preview Post</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    {% include 'includes/scripts.html' %}
+    <script src="https://cdn.tiny.cloud/1/c1v5y037nkftqy4k66ygblxccxcy313ybvwvv2vhjixs71pm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+          selector: 'textarea',
+          block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
+          plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak codesample',
+          toolbar_mode: 'floating',
+          codesample_languages: [
+            {text: 'HTML/XML', value: 'markup'},
+            {text: 'JavaScript', value: 'javascript'},
+            {text: 'CSS', value: 'css'},
+            {text: 'PHP', value: 'php'},
+            {text: 'Ruby', value: 'ruby'},
+            {text: 'Python', value: 'python'},
+            {text: 'Java', value: 'java'},
+            {text: 'C', value: 'c'},
+            {text: 'C#', value: 'csharp'},
+            {text: 'C++', value: 'cpp'}
+        ],
+          toolbar: 'advlist codesample autolink lists link image charmap hr anchor preview pagebreak h1 h2 h3 p a'
+       });
+
+       function changePostValue(){
+            // change value of text area input before submitting
+            document.getElementById('post-content').value = tinyMCE.activeEditor.getContent();
+            document.getElementById('create-post-form').submit();
+        }
+
+        function previewPost(){
+            if(tinyMCE.activeEditor.getContent() == ''){
+                return false;
+            }
+            const x = document.getElementById('category');
+            
+            document.getElementById('post-content').value = tinyMCE.activeEditor.getContent();
+            localStorage.setItem('title', document.getElementById('title').value);
+            localStorage.setItem('category', x.options[x.selectedIndex].text);
+            localStorage.setItem('status', document.getElementById('status').value);
+            localStorage.setItem('content', tinyMCE.activeEditor.getContent());
+            window.open('http://127.0.0.1:5000/dashboard/preview/post', '_blank');
+        }
+
+      </script>
+</body>
+</html>

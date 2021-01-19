@@ -1,0 +1,65 @@
+{% if current_user.is_authenticated %}
+    <div class="logged-in-nav">
+        <div class="nav-branding">
+            <h1>👋<span id="welcome-heading">Hello, Neil.</span></h1>
+        </div>
+        <div class="logged-in-links">
+            <ul>
+                <li>
+                    <a href="{{url_for('admin.dashboard')}}">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('auth.logout')}}">
+                        <i class="fas fa-sign-out-alt"></i>
+                        logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mobile-nav">
+        <i onclick="openNav()" class="fas fa-bars"></i>
+        <i onclick="closeNav()" class="fas fa-times"></i>
+    </div>
+    <div class="mobile-links">
+        <ul>
+            <li>
+                <a href="{{url_for('admin.dashboard')}}">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="{{url_for('auth.logout')}}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    logout
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endif %}
+<nav>
+    <div class="nav-branding">
+        <a href="{{url_for('main.index')}}">
+            <h1>neilWrites</h1>
+        </a>
+    </div>
+    <div class="nav-links">
+        <ul>
+            <li>
+                <a href="{{url_for('admin.categories')}}">
+                    Categories
+                </a>
+            </li>
+            <li>
+                <a href="{{url_for('admin.posts')}}">
+                    Posts
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
