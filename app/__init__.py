@@ -12,9 +12,9 @@ app.register_blueprint(admin.admin_bp)
 app.register_blueprint(auth.auth_bp)
 
 from app.database import setup_db
-print('setting up database')
+
 setup_db(app, os.environ.get('DB_PATH'))
-print('db setup')
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
