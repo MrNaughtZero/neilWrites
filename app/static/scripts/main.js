@@ -1,3 +1,7 @@
+window.onresize = function(){
+    addMediaQuery()
+}
+
 function savePostTitle(){
     const x = document.getElementById('post-title').value;
     if(x == ''){
@@ -19,6 +23,19 @@ function changeNavPosition(){
     if(document.querySelector('.logged-in-nav') !== null){
         document.getElementById('front-nav').style.top = '60px';
         document.querySelector('.home-content').style.marginTop = '100px';
+    }
+}
+
+function addMediaQuery(){
+    const x = document.getElementsByClassName('home-content')[0];
+    if(document.querySelector('.logged-in-nav') == null){
+        if(window.matchMedia('(max-width:1200px)').matches){
+            x.style.position = 'relative';
+            x.style.top = '100px';
+        }
+        else{
+            x.style.top = '0';
+        }
     }
 }
 
