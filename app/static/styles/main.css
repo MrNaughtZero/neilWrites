@@ -782,6 +782,10 @@ code {
   margin-right: 5px;
 }
 
+pre.language-markup {
+  max-width: 100%;
+}
+
 .flashed-message-edit {
   color: green;
   position: relative;
@@ -871,7 +875,7 @@ h1.preview-post-heading {
     margin-bottom: 20px;
     padding-bottom: 30px;
   }
-  p.copyright, .must-read-header, .must-read-block {
+  p.copyright, .must-read-header{
     display: none;
   }
   .right-block {
@@ -879,12 +883,22 @@ h1.preview-post-heading {
     width: 100%;
     padding-left: 0;
   }
+  .view-post {
+    margin-bottom: 120px;
+  }
   .index-all-post, .index-post {
     margin-right: 0;
     padding-right: 0;
   }
   form.mail-chimp-form {
     width: 100%;
+  }
+  .must-read-block {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+  .index-post:last-child {
+    margin-bottom: 100px;
   }
 }
 
@@ -929,9 +943,9 @@ h1.preview-post-heading {
 }
 
 @media screen and (max-width:500px){
-  code[class*="language-"], pre[class*="language-"] {
-    white-space: break-spaces!important;
-  }
+  .post-content-wrapper h2 {
+    font-size: 1em;
+}
 }
 
 @media screen and (max-width:433px){
