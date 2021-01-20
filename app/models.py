@@ -97,7 +97,7 @@ class Post(db.Model):
         db.session.commit()
 
     def all_posts(self):
-        return self.query.all()
+        return self.query.order_by(desc(Post.id)).all()
 
     def custom_query(self, query, value):
         ''' custom user query. Pass through query, and value . example username:Ian '''
