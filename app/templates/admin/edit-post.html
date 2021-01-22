@@ -48,7 +48,7 @@
         tinymce.init({
           selector: 'textarea',
           block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
-          plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak codesample',
+          plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak codesample code',
           toolbar_mode: 'floating',
           codesample_languages: [
             {text: 'HTML/XML', value: 'markup'},
@@ -70,7 +70,7 @@
                     }
             );
         },
-          toolbar: 'advlist codesample autolink lists link image charmap hr anchor preview pagebreak h1 h2 h3 p a'
+          toolbar: 'advlist codesample autolink lists link image charmap hr anchor preview pagebreak h1 h2 h3 p a code'
        });
 
        function changePostValue(){
